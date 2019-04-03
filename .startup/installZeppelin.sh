@@ -11,6 +11,8 @@ then
 
   echo "Untar Zeppelin..."
   tar -zxf zeppelin-0.7.1.tar.gz
+  rm zeppelin-0.7.1-dse-5.1.1.tar.gz
+  rm zeppelin-0.7.1-dse-5.1.1.tar
 
   #Zeppelin Notebook API.
   zeppelin-0.7.1/bin/zeppelin-daemon.sh start
