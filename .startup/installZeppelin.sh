@@ -47,8 +47,8 @@ then
 
   sleep 5
 
-  curl -vX POST http://localhost:8080/api/notebook/import -d @notebook/CountMinSketch/note.json \--header "Content-Type: application/json"
-  curl -vX POST http://localhost:8080/api/notebook/import -d @notebook/HyperLogLog/note.json \--header "Content-Type: application/json"
+  curl -vX POST http://localhost:8080/api/notebook/import -d @notebook/zeppelin/CountMinSketch/note.json \--header "Content-Type: application/json"
+  curl -vX POST http://localhost:8080/api/notebook/import -d @notebook/zeppelin/HyperLogLog/note.json \--header "Content-Type: application/json"
 
   sleep 5
 
@@ -57,4 +57,5 @@ then
   #Determine the localhost
   #MYIP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'|grep -v "172.17.0.1")
   #node0
+  echo "Finished Zeppelin Install"
 fi

@@ -32,12 +32,25 @@ RELOAD SEARCH INDEX ON approximations.cmsdata;
 
 REBUILD SEARCH INDEX ON approximations.cmsdata;
 
-CREATE TABLE  IF NOT EXISTS approximations.cmsdata10min ( id text, date text, batchtime timestamp, cmsstore blob, preview map<text, bigint>, PRIMARY KEY ((id, date), batchtime)) WITH CLUSTERING ORDER BY (batchtime DESC);
+CREATE TABLE  IF NOT EXISTS approximations.cmsdata10min ( id text, date text, batchtime timestamp, cmsstore blob, preview map<text, bigint>, previewtagnames frozen<set<text>>, PRIMARY KEY ((id, date), batchtime)) WITH CLUSTERING ORDER BY (batchtime DESC);
 
-CREATE SEARCH INDEX IF NOT EXISTS ON approximations.cmsdata10min WITH COLUMNS id, date, batchtime;
+CREATE SEARCH INDEX IF NOT EXISTS ON approximations.cmsdata10min WITH COLUMNS id, date, batchtime, previewtagnames;
 
 RELOAD SEARCH INDEX ON approximations.cmsdata10min;
 
 REBUILD SEARCH INDEX ON approximations.cmsdata10min;
+
+
+ALTER KEYSPACE system_auth WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'DC1' : 3};
+
+ALTER KEYSPACE dse_security WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'DC1' : 3};
+
+ALTER KEYSPACE "HiveMetaStore" WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'DC1' : 3};
+
+ALTER KEYSPACE dse_analytics WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'DC1' : 3};
+
+ALTER KEYSPACE dse_leases WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'DC1' : 3};
+
+ALTER KEYSPACE dse_perf WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'DC1' : 3};
 
 ALTER KEYSPACE dsefs WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'DC1' : 3};
